@@ -1,21 +1,35 @@
+import 'package:equatable/equatable.dart';
 
 class User {
-	final String id;
-	final String email;
+  final String id;
+  final String email;
 
-	User({required this.id, required this.email});
+  const User({required this.id, required this.email});
+}
 
-	Map<String, dynamic> toJson() {
-		return {
-			'id': id,
-			'email': email,
-		};
-	}
+abstract class AuthState extends Equatable {
+  const AuthState();
 
-	factory User.fromJson(Map<String, dynamic> json) {
-		return User(
-			id: json['id'],
-			email: json['email'],
-		);
-	}
+  @override
+  List<Object> get props => [];
+}
+
+class AuthInitial extends AuthState {}
+
+class Authenticated extends AuthState {
+  final User user;
+  const Authenticated(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
+
+class Unauthenticated extends AuthState {}
+
+class AuthError extends AuthState {
+  final String message;
+  const AuthError(this.message);
+
+  @override
+  List<Object> get props => [message];
 }
