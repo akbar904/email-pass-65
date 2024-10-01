@@ -27,7 +27,22 @@
       "name": "lib/main.dart",
       "description": "The main entry point of the Flutter application.",
       "class_diagram": "@startuml\nclass MyApp {\n}\n@enduml",
-      "methods": [],
+      "methods": [
+        {
+          "name": "main",
+          "description": "The main entry point of the Flutter application.",
+          "parameters": null,
+          "return_type": "void"
+        },
+        {
+          "name": "build",
+          "description": "Builds the widget tree for the MyApp class.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
@@ -38,13 +53,23 @@
     {
       "name": "lib/screens/login_screen.dart",
       "description": "The login screen where users can enter their email and password.",
-      "class_diagram": "@startuml\nclass LoginScreen {\n}\n@enduml",
-      "methods": [],
+      "class_diagram": "@startuml\nclass LoginScreen {\n  build(context: BuildContext): Widget\n}\n@enduml",
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the login screen widget.",
+          "parameters": [
+            "context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
         "lib/widgets/login_form.dart",
-        "lib/cubits/auth_cubit.dart"
+        "lib/cubits/auth_cubit.dart",
+        "lib/cubits/auth_state.dart"
       ]
     },
     {
@@ -82,28 +107,49 @@
       ],
       "dependencies": [
         "package:bloc/bloc.dart",
-        "lib/cubits/auth_state.dart"
+        "lib/cubits/auth_state.dart",
+        "lib/models/user.dart"
       ]
     },
     {
       "name": "lib/cubits/auth_state.dart",
       "description": "State class for authentication.",
-      "class_diagram": "@startuml\nclass AuthState {\n}\nclass AuthInitial extends AuthState {\n}\nclass Authenticated extends AuthState {\n}\nclass Unauthenticated extends AuthState {\n}\n@enduml",
+      "class_diagram": "@startuml\nclass AuthState {\n}\nclass AuthInitial extends AuthState {\n}\nclass Authenticated extends AuthState {\n}\nclass Unauthenticated extends AuthState {\n}\nclass AuthError extends AuthState {\n}\n@enduml",
       "methods": [],
-      "dependencies": []
+      "dependencies": [
+        "package:equatable/equatable.dart",
+        "../models/user.dart"
+      ]
     },
     {
       "name": "lib/models/user.dart",
       "description": "Data model representing a user.",
       "class_diagram": "@startuml\nclass User {\n  String id\n  String email\n}\n@enduml",
       "methods": [],
-      "dependencies": []
+      "dependencies": [
+        "package:equatable/equatable.dart"
+      ]
     },
     {
       "name": "lib/widgets/login_form.dart",
       "description": "Widget for the login form.",
       "class_diagram": "@startuml\nclass LoginForm extends StatefulWidget {\n}\n@enduml",
-      "methods": [],
+      "methods": [
+        {
+          "name": "createState",
+          "description": "Creates the mutable state for this widget.",
+          "parameters": null,
+          "return_type": "_LoginFormState"
+        },
+        {
+          "name": "build",
+          "description": "Builds the widget tree for the LoginForm.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
@@ -114,7 +160,16 @@
       "name": "lib/widgets/logout_button.dart",
       "description": "Widget for the logout button.",
       "class_diagram": "@startuml\nclass LogoutButton extends StatelessWidget {\n}\n@enduml",
-      "methods": [],
+      "methods": [
+        {
+          "name": "build",
+          "description": "Builds the widget tree for the LogoutButton.",
+          "parameters": [
+            "BuildContext context"
+          ],
+          "return_type": "Widget"
+        }
+      ],
       "dependencies": [
         "package:flutter/material.dart",
         "package:flutter_bloc/flutter_bloc.dart",
